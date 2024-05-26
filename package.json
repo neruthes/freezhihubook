@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "jsdom": "^24.0.0",
+    "xmldom": "^0.6.0"
+  }
+}

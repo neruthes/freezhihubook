@@ -1,0 +1,8 @@
+node_modules
+*.pdf
+*.aux
+*.toc
+*.log
+*.out
+
+raw

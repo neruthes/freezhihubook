@@ -1,0 +1,38 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage[textwidth=35em,vmargin=28mm]{geometry}
+\usepackage{calc,fontspec,xcolor,xunicode,xeCJK,xeCJKfntef,paralist,enumitem,longtable,tabularx,graphicx,datetime2,tocloft}
+
+\title{知乎民间精选合集2023}
+\author{}
+\date{Version \today}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+
+\providecommand{\zhihuquestion}[1]{
+    \chapter{#1}
+}
+\newenvironment{zhihuanswer}{
+}{
+    \vskip 2em
+    \begin{center}
+        \rule{0.5\linewidth}{0.4pt}
+    \end{center}
+    \vskip 2em
+}
+\providecommand{\answerAuthor}[1]{
+    \par
+    \parbox{\linewidth}{\bfseries 作者:~~#1}\par\vskip 1em
+}
+
+
+
+\begin{document}
+\begin{titlepage}
+    \maketitle
+\end{titlepage}
+\tableofcontents\clearpage
+
+\input{predoc/2023/index.TEX}
+\end{document}
