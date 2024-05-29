@@ -1,11 +1,20 @@
 \documentclass[11pt,a4paper]{report}
 \usepackage[textwidth=35em,vmargin=28mm]{geometry}
 \usepackage{calc,fontspec,xcolor,xunicode,xeCJK,xeCJKfntef,paralist,enumitem,longtable,tabularx,graphicx,datetime2,tocloft}
+\usepackage[hidelinks]{hyperref}
 
-\title{知乎民间精选合集2023}
+\title{知乎年度记忆民间合集 2023}
 \author{}
 \date{Version \today}
 
+\setmainfont{TeX Gyre Termes}
+\setromanfont{TeX Gyre Termes}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{JetBrains Mono NL}
+\setCJKmainfont{Noto Serif CJK SC}
+\setCJKromanfont{Noto Serif CJK SC}
+\setCJKsansfont{Noto Sans CJK SC}
+\setCJKmonofont{Noto Sans CJK SC}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt}
 
@@ -17,13 +26,16 @@
 }{
     \vskip 2em
     \begin{center}
-        \rule{0.5\linewidth}{0.4pt}
+        \rule{0.85\linewidth}{0.5pt}
     \end{center}
     \vskip 2em
 }
 \providecommand{\answerAuthor}[1]{
-    \par
-    \parbox{\linewidth}{\bfseries 作者:~~#1}\par\vskip 1em
+    \par\nopagebreak
+    \parbox{\linewidth}{\bfseries 答主:~~#1}\par\nopagebreak\nopagebreak
+}
+\providecommand{\answerUrl}[1]{
+    \href{#1}{#1}\par\nopagebreak\vskip 1em\nopagebreak
 }
 
 
@@ -35,4 +47,31 @@
 \tableofcontents\clearpage
 
 \input{predoc/2023/index.TEX}
+
+
+
+
+
+
+
+\clearpage
+\pagestyle{empty}
+\leavevmode\vfill\small\sffamily
+Compiled by The FreeZhihuBook Project.
+
+由FreeZhihuBook项目组编制。
+
+The contents may be copyrighted by their own creators.
+This e-book is made for information archiving and sociological history researches.
+No guarantee is made in terms of noninfringement of third-party intellectual property rights.
+
+内容版权归创作者所有。
+本电子书用于信息存档和社会学历史研究。
+不保证不侵犯第三方知识产权。
+
+This project is not affiliated to or endorsed by the freezhihu.org website.
+
+本项目组与freezhihu.org网站无关。
+
+GitHub: \href{https://github.com/neruthes/freezhihubook}{https://github.com/neruthes/freezhihubook}
 \end{document}

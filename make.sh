@@ -17,16 +17,20 @@ case $1 in
         done
         ;;
     predoc | predoc/)
-        dirs="$(find predoc -type d)"
         find predoc -name index.TEX -delete
-        find predoc -mindepth 2 -maxdepth 2 -type d | while read -r line; do
+        find predoc -mindepth 2 -maxdepth 2 -type d | grep -v index.TEX | sort | while read -r line; do
             spec="$(cut -d/ -f2- <<< "$line")"
             echo "spec=$spec"
-            cat "extracted/$spec.question.txt" | sed 's|^|\\zhihuquestion{|' | sed 's|$|}|' > "$line/../index.TEX"
+            cat "extracted/$spec.question.txt" | sed 's|^|\\zhihuquestion{|' | sed 's|$|}|' > "$line/index.TEX"
         done
-        while read -r line; do
-            find "$line" -mindepth 1 -maxdepth 1 -type f -name '*.TEX' | sed 's|^|\\input{|' | sed 's|$|}|' >> "$line/../index.TEX"
-        done <<< "$dirs"
+        ### Generate 'predoc/2023/624165442/index.TEX'
+        find predoc -mindepth 2 -maxdepth 2 -type d | while read -r line; do
+            find "$line" -mindepth 1 -maxdepth 1 -type f -name '*.TEX' | sort | grep -v index.TEX | sed 's|^|\\input{|' | sed 's|$|}|' >> "$line/index.TEX"
+        done
+        ### Generate 'predoc/2023/index.TEX'
+        find predoc -mindepth 1 -maxdepth 1 -type d | while read -r line; do
+            find "$line" -mindepth 2 -maxdepth 2 -name 'index.TEX' | sort | sed 's|^|\\input{|' | sed 's|$|}|' > "$line/index.TEX"
+        done
         ;;
     extracted/*/*/*.html)
         ### Extracted answer
@@ -53,10 +57,16 @@ case $1 in
         fi
         wait
         ;;
+    yearbooks/*.)
+        if [[ -e "$1"tex ]]; then
+            ./make.sh "$1"tex
+        fi
+        ;;
     yearbooks/*.tex)
         dir="$(dirname "$1")"
         xelatex -interaction=batchmode -output-directory="$dir" "$1"
         xelatex -interaction=batchmode -output-directory="$dir" "$1"
-        echo "${1/tex/pdf}"
+        pdf_path="${1/tex/pdf}"
+        du -h "$(realpath "$pdf_path")"
         ;;
 esac
